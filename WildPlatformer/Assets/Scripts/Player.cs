@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
     [SerializeField] float _jumpHeight;
     [SerializeField] float _jumpDistance;
 
+    [SerializeField] float _smallJump;
+    [SerializeField] float _maxVerticalSpeed;
+    bool _jumpPressed = false;
+
     float _maxHorizontalSpeed;
     float _gravity;
     float _jumpSpeed;
@@ -28,12 +32,13 @@ public class Player : MonoBehaviour
 
     int _inputAxis;
 
+    float _jumpTimer = 0;
+    [SerializeField] float _jumpTimerAmount;
+    public bool _grounded;
+
     Rigidbody2D _rb2D;
     BoxCollider2D _boxCollider2D;
 
-    bool _jumpPressed = false;
-
-    public bool _grounded;
 
     [SerializeField] Transform _gunPivotTransform;
 
@@ -71,10 +76,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(_jumpPressed == true)
-        {
-            Debug.Log("JumpPressed");
-        }
+        _jumpTimer = Mathf.MoveTowards(_jumpTimer, -1, Time.deltaTime);
 
         _stateText.text = _currentState.ToString();
         switch (_currentState)
@@ -95,6 +97,18 @@ public class Player : MonoBehaviour
                 Falling();
                 break;
         }
+
+        if(_jumpTimer > 0 && _jumpPressed == true)
+        {
+            if (_currentState == STATES.IDLE || _currentState == STATES.RUN)
+            {
+                _jumpPressed = false;
+                _velocity.y = _jumpSpeed;
+                _currentState = STATES.JUMP;
+            }
+        }
+
+        _velocity.y = Mathf.Clamp(_velocity.y, -_maxVerticalSpeed, _maxVerticalSpeed);
     }
 
     void Idle()
@@ -103,6 +117,10 @@ public class Player : MonoBehaviour
         if (_inputAxis != 0)
         {
             _currentState = STATES.RUN;
+        }
+        if (!IsGrounded())
+        {
+            _currentState = STATES.FALL;
         }
     }
     void Running()
@@ -132,10 +150,14 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            if (_currentState == STATES.IDLE || _currentState == STATES.RUN)
+            _jumpPressed = true;
+            _jumpTimer = _jumpTimerAmount;
+        }
+        if (context.canceled)
+        {
+            if(_currentState == STATES.JUMP)
             {
-                _velocity.y = _jumpSpeed;
-                _currentState = STATES.JUMP;
+                _velocity.y = _velocity.y * _smallJump;
             }
         }
     }
@@ -150,6 +172,10 @@ public class Player : MonoBehaviour
             _velocity.x = Mathf.MoveTowards(_velocity.x, _inputAxis * _maxHorizontalSpeed, _horizontalAcceleration / _jumpControlAcceleration * Time.deltaTime);
         }
 
+        if (IsTouchingCeiling())
+        {
+            _velocity.y = 0;
+        }
 
         if (_velocity.y <= 0)
         {
@@ -192,6 +218,11 @@ public class Player : MonoBehaviour
     bool IsGrounded()
     {
         RaycastHit2D ray = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0, Vector2.down, 0.1f, _groundLayerMask);
+        return ray.collider != null;
+    }
+    bool IsTouchingCeiling()
+    {
+        RaycastHit2D ray = Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0, Vector2.up, 0.1f, _groundLayerMask);
         return ray.collider != null;
     }
 }
