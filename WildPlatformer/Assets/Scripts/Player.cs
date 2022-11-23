@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        _velocity.y = Mathf.Clamp(_velocity.y, -_maxVerticalSpeed, _maxVerticalSpeed);
+        _velocity.y = Mathf.Clamp(_velocity.y, -_maxVerticalSpeed, 10000000);
     }
 
     void Idle()
@@ -157,6 +157,7 @@ public class Player : MonoBehaviour
         {
             if(_currentState == STATES.JUMP)
             {
+                Debug.Log("SmallJump");
                 _velocity.y = _velocity.y * _smallJump;
             }
         }
@@ -174,6 +175,7 @@ public class Player : MonoBehaviour
 
         if (IsTouchingCeiling())
         {
+            Debug.Log("Osui kattoon");
             _velocity.y = 0;
         }
 

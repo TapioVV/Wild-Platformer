@@ -197,7 +197,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.39249736
     - serializedVersion: 3
-      time: 0.44315225
+      time: 0.7045658
       value: 0.0037279725
       inSlope: 0.05327015
       outSlope: 0.05327015
@@ -208,8 +208,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.7891282
-      outSlope: 1.7891282
+      inSlope: 3.37223
+      outSlope: 3.37223
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -217,8 +217,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _speed: 80
-  _lifeTime: 0.15
+  _speed: 150
+  _lifeTime: 0.1
 --- !u!50 &5076967964058534880
 Rigidbody2D:
   serializedVersion: 4
