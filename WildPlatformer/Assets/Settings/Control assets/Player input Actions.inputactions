@@ -477,6 +477,28 @@
                 },
                 {
                     "name": "",
+                    "id": "8ae26216-f659-4fbc-b6a1-d38d1a3961ba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetAfterDeath",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f5a4570-7a53-4f6d-83fe-40ea7cd154a1",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetAfterDeath",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "946af7f8-6697-46c4-93c6-df07f22911c3",
                     "path": "<Keyboard>/r",
                     "interactions": "",

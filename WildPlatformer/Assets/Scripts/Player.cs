@@ -149,11 +149,13 @@ public class Player : MonoBehaviour
                 Falling();
                 break;
             case STATES.DEAD:
+                _gunPivotTransform.gameObject.GetComponent<AudioSource>().Stop();
                 _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
                 _rb2D.velocity = Vector2.zero;
                 _deathScreen.SetActive(true);
                 break;
             case STATES.WIN:
+                _gunPivotTransform.gameObject.GetComponent<AudioSource>().Stop();
                 _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
                 _rb2D.velocity = Vector2.zero;
                 _winScreen.SetActive(true);

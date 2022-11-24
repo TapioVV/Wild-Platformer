@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] Image _fadeImage;
     [SerializeField] GameObject _stageSelect;
+    int _stageSelectSceneNumber;
     bool goofyBool = false;
 
     private void Start()
@@ -20,10 +21,19 @@ public class MainMenu : MonoBehaviour
         goofyBool = !goofyBool;
         _stageSelect.SetActive(goofyBool);
     }
-    void LoadNextScene()
+
+    public void StageSelectedButtonPress(int _sceneNumber)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _stageSelectSceneNumber = _sceneNumber;
+        _fadeImage.DOFade(1, 0.25f).OnComplete(LoadStage);
     }
+    public void LoadStage()
+    {
+        SceneManager.LoadScene(_stageSelectSceneNumber);
+    }
+
+    
+
     public void TutorialButtonPress()
     {
         _fadeImage.DOFade(1, 0.25f).OnComplete(LoadTutorialScene);
