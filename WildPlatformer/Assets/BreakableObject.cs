@@ -27,7 +27,7 @@ public class BreakableObject : MonoBehaviour
         {
             DestroyMyself();
         }
-    }
+    } 
 
     void TakeDamage()
     {
