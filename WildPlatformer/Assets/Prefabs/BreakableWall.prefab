@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8963605440903284042}
   - component: {fileID: 8963605440903284040}
   - component: {fileID: 8963605440903284041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakableWall
   m_TagString: Breakable
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   _spriteColor: {r: 0.9411765, g: 0.85490197, b: 0.35686275, a: 1}
   _sr: {fileID: 8963605440979156939}
   _health: 4
+  _srShape: {fileID: 0}
 --- !u!61 &8963605440903284041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -85,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8963605440979156938}
   - component: {fileID: 8963605440979156939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakableWallSprite
   m_TagString: Breakable
   m_Icon: {fileID: 0}

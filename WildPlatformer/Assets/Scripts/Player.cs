@@ -8,8 +8,11 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     [SerializeField] LayerMask _groundLayerMask;
-    enum STATES { IDLE, RUN, JUMP, FALL, DEAD}
+    enum STATES { IDLE, RUN, JUMP, FALL, DEAD, WIN}
     STATES _currentState;
+
+    [SerializeField] GameObject _deathScreen;
+    [SerializeField] GameObject _winScreen;
 
     [SerializeField] float _horizontalAcceleration;
     [SerializeField] float _horizontalDeacceleration;
@@ -67,9 +70,13 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-           if(_currentState == STATES.DEAD)
+            if(_currentState == STATES.DEAD)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            if (_currentState == STATES.WIN)
+            {
+                SceneManager.LoadScene(0);
             }
         }
     }
@@ -77,16 +84,26 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            if (_currentState != STATES.DEAD)
+            if (_currentState != STATES.DEAD && _currentState != STATES.WIN)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+        }
+    }
+    public void LeaveToMenuInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+                SceneManager.LoadScene(0);
         }
     }
 
     #endregion
     void Start()
     {
+        _deathScreen.SetActive(false);
+        _winScreen.SetActive(false);
+
         _rb2D = GetComponent<Rigidbody2D>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _anim = GetComponent<Animator>();
@@ -101,9 +118,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Death")
+        if (collision.gameObject.tag == "Death" && _currentState != STATES.WIN)
         {
             _currentState = STATES.DEAD;
+        }
+        if(collision.gameObject.tag == "Win")
+        {
+            _currentState = STATES.WIN;
         }
     }
     private void Update()
@@ -128,7 +149,14 @@ public class Player : MonoBehaviour
                 Falling();
                 break;
             case STATES.DEAD:
+                _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
                 _rb2D.velocity = Vector2.zero;
+                _deathScreen.SetActive(true);
+                break;
+            case STATES.WIN:
+                _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+                _rb2D.velocity = Vector2.zero;
+                _winScreen.SetActive(true);
                 break;
         }
 
