@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Gun : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPrefab;
+    
     float _shootingTimer;
     [SerializeField] float _shootingCooldown;
     bool _shootingActivated = false;

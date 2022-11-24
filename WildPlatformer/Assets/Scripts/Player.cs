@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
  
     [SerializeField] LayerMask _groundLayerMask;
     [SerializeField] TMP_Text _stateText;
-    enum STATES { IDLE, RUN, JUMP, FALL}
+    enum STATES { IDLE, RUN, JUMP, FALL, DEAD}
     STATES _currentState;
 
     [SerializeField] float _horizontalAcceleration;
@@ -65,6 +65,17 @@ public class Player : MonoBehaviour
             _gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
         }
     }
+    public void ResetAfterDeathInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+           if(_currentState == STATES.DEAD)
+            {
+                Debug.Log("Jee");
+            }
+        }
+    }
+
     #endregion
     void Start()
     {
@@ -80,6 +91,13 @@ public class Player : MonoBehaviour
         _maxHorizontalSpeed = _jumpDistance / (2 * _timeToJumpPeak);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Death")
+        {
+            _currentState = STATES.DEAD;
+        }
+    }
     private void Update()
     {
         _jumpTimer = Mathf.MoveTowards(_jumpTimer, -1, Time.deltaTime);
@@ -102,6 +120,9 @@ public class Player : MonoBehaviour
             case STATES.FALL:
                 Falling();
                 break;
+            case STATES.DEAD:
+                
+                break;
         }
 
         if(_jumpTimer > 0 && _jumpPressed == true)
@@ -120,7 +141,7 @@ public class Player : MonoBehaviour
     void Idle()
     {
         _anim.CrossFade("character_idle_animation", 0, 0);
-        _velocity.y = 0;
+        _velocity.y = -2;
         if (_inputAxis != 0)
         {
             _currentState = STATES.RUN;
@@ -133,7 +154,7 @@ public class Player : MonoBehaviour
     void Running()
     {
         _anim.CrossFade("character_run_animation", 0, 0);
-        _velocity.y = 0;
+        _velocity.y = -2;
         if (_inputAxis == 0)
         {
             _velocity.x = Mathf.MoveTowards(_velocity.x, 0, _horizontalDeacceleration * Time.deltaTime);
