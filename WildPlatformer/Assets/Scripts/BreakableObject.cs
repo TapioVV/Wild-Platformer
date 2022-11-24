@@ -15,7 +15,14 @@ public class BreakableObject : MonoBehaviour
 
     private void Start()
     {
-        _srStartScale = _sr.transform.localScale;
+        if (_sr != null)
+        {
+            _srStartScale = _sr.transform.localScale;
+        }
+        else
+        {
+            _srStartScale = _srShape.transform.localScale;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

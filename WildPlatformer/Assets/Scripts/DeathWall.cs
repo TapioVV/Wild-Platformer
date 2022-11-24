@@ -12,6 +12,6 @@ public class DeathWall : MonoBehaviour
 
     void Update()
     {
-        transform.position = transform.position + new Vector3(35 * Time.deltaTime, 0, 0);
+        transform.position = transform.position + new Vector3(36 * Time.deltaTime, 0, 0);
     }
 }
