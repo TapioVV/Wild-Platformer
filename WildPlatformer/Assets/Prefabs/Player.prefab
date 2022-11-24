@@ -530,7 +530,19 @@ MonoBehaviour:
     m_ActionId: 40d4c85f-fe7f-4148-85d0-1d3dc5643fff
     m_ActionName: Player/ResetAfterDeath[/Keyboard/anyKey,/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID/rightTrigger,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/leftTrigger,/DualSenseGamepadHID/buttonSouth,/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID/buttonWest,/DualSenseGamepadHID/buttonNorth,/DualSenseGamepadHID/rightStickPress,/DualSenseGamepadHID/leftStickPress]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3304347580209893238}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: ResetInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7e304573-3465-4184-a2f8-643be0e8ade4
     m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Player : MonoBehaviour
@@ -68,7 +69,17 @@ public class Player : MonoBehaviour
         {
            if(_currentState == STATES.DEAD)
             {
-                Debug.Log("Jee");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+    }
+    public void ResetInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_currentState != STATES.DEAD)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
