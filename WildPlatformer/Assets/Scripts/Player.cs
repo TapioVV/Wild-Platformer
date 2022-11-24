@@ -6,9 +6,7 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
- 
     [SerializeField] LayerMask _groundLayerMask;
-    [SerializeField] TMP_Text _stateText;
     enum STATES { IDLE, RUN, JUMP, FALL, DEAD}
     STATES _currentState;
 
@@ -41,7 +39,6 @@ public class Player : MonoBehaviour
     BoxCollider2D _boxCollider2D;
     Animator _anim;
     SpriteRenderer _sr;
-
 
     [SerializeField] Transform _gunPivotTransform;
 
@@ -102,7 +99,6 @@ public class Player : MonoBehaviour
     {
         _jumpTimer = Mathf.MoveTowards(_jumpTimer, -1, Time.deltaTime);
 
-        _stateText.text = _currentState.ToString();
         switch (_currentState)
         {
             case STATES.IDLE:
@@ -121,7 +117,7 @@ public class Player : MonoBehaviour
                 Falling();
                 break;
             case STATES.DEAD:
-                
+                _rb2D.velocity = Vector2.zero;
                 break;
         }
 

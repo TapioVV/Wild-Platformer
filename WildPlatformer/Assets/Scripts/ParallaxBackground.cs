@@ -24,7 +24,7 @@ public class ParallaxBackground : MonoBehaviour
         transform.position += new Vector3(deltaMovement.x * _parallaxEffectMultiplier.x, deltaMovement.y * _parallaxEffectMultiplier.y, 0);
             
         _lastCameraPosition = _cameraTransform.position;
-        if (_cameraTransform.position.x - transform.position.x >= _textureUnitSizeX)
+        if (Mathf.Abs(_cameraTransform.position.x - transform.position.x) >= _textureUnitSizeX)
         {
             float offsetPositionX = (_cameraTransform.position.x - transform.position.x) % _textureUnitSizeX;
             transform.position = new Vector3(_cameraTransform.position.x + offsetPositionX, transform.position.y);
