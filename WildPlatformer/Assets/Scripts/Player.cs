@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] LayerMask _groundLayerMask;
-    [SerializeField] TMP_Text _stateText;
-    enum STATES { IDLE, RUN, JUMP, FALL}
+    enum STATES { IDLE, RUN, JUMP, FALL, DEAD, WIN}
     STATES _currentState;
+
+    [SerializeField] GameObject _deathScreen;
+    [SerializeField] GameObject _winScreen;
 
     [SerializeField] float _horizontalAcceleration;
     [SerializeField] float _horizontalDeacceleration;
@@ -38,7 +41,8 @@ public class Player : MonoBehaviour
 
     Rigidbody2D _rb2D;
     BoxCollider2D _boxCollider2D;
-
+    Animator _anim;
+    SpriteRenderer _sr;
 
     [SerializeField] Transform _gunPivotTransform;
 
@@ -62,11 +66,49 @@ public class Player : MonoBehaviour
             _gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
         }
     }
+    public void ResetAfterDeathInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(_currentState == STATES.DEAD)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            if (_currentState == STATES.WIN)
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+    }
+    public void ResetInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_currentState != STATES.DEAD && _currentState != STATES.WIN)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
+    }
+    public void LeaveToMenuInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+                SceneManager.LoadScene(0);
+        }
+    }
+
     #endregion
     void Start()
     {
+        _deathScreen.SetActive(false);
+        _winScreen.SetActive(false);
+
         _rb2D = GetComponent<Rigidbody2D>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
+        _anim = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
+
         _currentState = STATES.IDLE;
 
         _gravity = (2 * _jumpHeight) / Mathf.Pow(_timeToJumpPeak, 2);
@@ -74,11 +116,21 @@ public class Player : MonoBehaviour
         _maxHorizontalSpeed = _jumpDistance / (2 * _timeToJumpPeak);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Death" && _currentState != STATES.WIN)
+        {
+            _currentState = STATES.DEAD;
+        }
+        if(collision.gameObject.tag == "Win")
+        {
+            _currentState = STATES.WIN;
+        }
+    }
     private void Update()
     {
         _jumpTimer = Mathf.MoveTowards(_jumpTimer, -1, Time.deltaTime);
 
-        _stateText.text = _currentState.ToString();
         switch (_currentState)
         {
             case STATES.IDLE:
@@ -95,6 +147,18 @@ public class Player : MonoBehaviour
 
             case STATES.FALL:
                 Falling();
+                break;
+            case STATES.DEAD:
+                _gunPivotTransform.gameObject.GetComponent<AudioSource>().Stop();
+                _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+                _rb2D.velocity = Vector2.zero;
+                _deathScreen.SetActive(true);
+                break;
+            case STATES.WIN:
+                _gunPivotTransform.gameObject.GetComponent<AudioSource>().Stop();
+                _rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+                _rb2D.velocity = Vector2.zero;
+                _winScreen.SetActive(true);
                 break;
         }
 
@@ -113,7 +177,8 @@ public class Player : MonoBehaviour
 
     void Idle()
     {
-        _velocity.y = 0;
+        _anim.CrossFade("character_idle_animation", 0, 0);
+        _velocity.y = -2;
         if (_inputAxis != 0)
         {
             _currentState = STATES.RUN;
@@ -125,7 +190,8 @@ public class Player : MonoBehaviour
     }
     void Running()
     {
-        _velocity.y = 0;
+        _anim.CrossFade("character_run_animation", 0, 0);
+        _velocity.y = -2;
         if (_inputAxis == 0)
         {
             _velocity.x = Mathf.MoveTowards(_velocity.x, 0, _horizontalDeacceleration * Time.deltaTime);
@@ -134,6 +200,17 @@ public class Player : MonoBehaviour
         {
             _velocity.x = Mathf.MoveTowards(_velocity.x, _inputAxis * _maxHorizontalSpeed, _horizontalAcceleration * Time.deltaTime);
         }
+
+        if (_inputAxis == 1)
+        {
+            _sr.flipX = false;
+        }
+        else if(_inputAxis == -1)
+        {
+            _sr.flipX = true;
+        }
+
+        
 
 
         if(_velocity.x >= -0.1f && _velocity.x <= 0.1f)
@@ -157,13 +234,13 @@ public class Player : MonoBehaviour
         {
             if(_currentState == STATES.JUMP)
             {
-                Debug.Log("SmallJump");
                 _velocity.y = _velocity.y * _smallJump;
             }
         }
     }
     void Jumping()
     {
+        _anim.CrossFade("character_jump_animation", 0, 0);
         if (_inputAxis == 0)
         {
             _velocity.x = Mathf.MoveTowards(_velocity.x, 0, _horizontalDeacceleration / _jumpControlDeacceleration * Time.deltaTime);
@@ -175,7 +252,6 @@ public class Player : MonoBehaviour
 
         if (IsTouchingCeiling())
         {
-            Debug.Log("Osui kattoon");
             _velocity.y = 0;
         }
 
@@ -188,6 +264,7 @@ public class Player : MonoBehaviour
     }
     void Falling()
     {
+        _anim.CrossFade("character_jump_animation", 0, 0);
         if (_inputAxis == 0)
         {
             _velocity.x = Mathf.MoveTowards(_velocity.x, 0, _horizontalDeacceleration / _jumpControlDeacceleration * Time.deltaTime);

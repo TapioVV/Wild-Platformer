@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerBullet
+  - Breakable
+  - Death
+  - Win
   layers:
   - Default
   - TransparentFX
@@ -13,8 +17,8 @@ TagManager:
   - UI
   - Ground
   - PlayerBullet
-  - 
-  - 
+  - Death
+  - Trigger
   - 
   - 
   - 
