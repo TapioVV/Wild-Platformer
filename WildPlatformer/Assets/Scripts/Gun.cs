@@ -3,28 +3,28 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] GameObject _bulletPrefab;
-    AudioSource _as;
-    [SerializeField] AudioClip SHOOTSOUND;
-    float _shootingTimer;
-    [SerializeField] float _shootingCooldown;
-    bool _shootingActivated = false;
+    [SerializeField] GameObject bulletPrefab;
+    AudioSource audioSource;
+    [SerializeField] AudioClip shootSound;
+    float shootingTimer;
+    [SerializeField] float shootingCooldown;
+    bool shootingActivated = false;
 
     private void Start()
     {
-        _as = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
-        _shootingTimer = Mathf.MoveTowards(_shootingTimer, -1, Time.deltaTime);
+        shootingTimer = Mathf.MoveTowards(shootingTimer, -1, Time.deltaTime);
 
-        if(_shootingActivated == true)
+        if(shootingActivated == true)
         {
-            if (_shootingTimer <= 0)
+            if (shootingTimer <= 0)
             {
-                _as.PlayOneShot(SHOOTSOUND);
-                Instantiate(_bulletPrefab, transform.position, transform.rotation);
-                _shootingTimer = _shootingCooldown;
+                audioSource.PlayOneShot(shootSound);
+                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                shootingTimer = shootingCooldown;
             }
         }
     }
@@ -33,11 +33,11 @@ public class Gun : MonoBehaviour
     {
         if (context.performed)
         {
-            _shootingActivated = true;
+            shootingActivated = true;
         }
         if (context.canceled)
         {
-            _shootingActivated = false;
+            shootingActivated = false;
         }
     }
 }

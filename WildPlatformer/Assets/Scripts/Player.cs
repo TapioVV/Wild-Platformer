@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
     public static event Action OnPlayerDeath;
 
     [SerializeField] LayerMask groundLayerMask;

@@ -5,38 +5,38 @@ using DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] Image _fadeImage;
-    [SerializeField] GameObject _stageSelect;
-    int _stageSelectSceneNumber;
+    [SerializeField] Image fadeImage;
+    [SerializeField] GameObject stageSelect;
+    int stageSelectSceneNumber;
     bool goofyBool = false;
 
     private void Start()
     {
-        _fadeImage.DOFade(0, 0.25f);
+        fadeImage.DOFade(0, 0.25f);
     }
 
     //Fades to black and then loads the next scene
     public void StageSelectMenuButtonPress()
     {
         goofyBool = !goofyBool;
-        _stageSelect.SetActive(goofyBool);
+        stageSelect.SetActive(goofyBool);
     }
 
-    public void StageSelectedButtonPress(int _sceneNumber)
+    public void StageSelectedButtonPress(int sceneNumber)
     {
-        _stageSelectSceneNumber = _sceneNumber;
-        _fadeImage.DOFade(1, 0.25f).OnComplete(LoadStage);
+        stageSelectSceneNumber = sceneNumber;
+        fadeImage.DOFade(1, 0.25f).OnComplete(LoadStage);
     }
     public void LoadStage()
     {
-        SceneManager.LoadScene(_stageSelectSceneNumber);
+        SceneManager.LoadScene(stageSelectSceneNumber);
     }
 
     
 
     public void TutorialButtonPress()
     {
-        _fadeImage.DOFade(1, 0.25f).OnComplete(LoadTutorialScene);
+        fadeImage.DOFade(1, 0.25f).OnComplete(LoadTutorialScene);
     }
     void LoadTutorialScene()
     {
@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
     //Fades to black and then exits the game;
     public void QuitButtonPress()
     {
-        _fadeImage.DOFade(1, 0.25f).OnComplete(QuitGame);
+        fadeImage.DOFade(1, 0.25f).OnComplete(QuitGame);
     }
     void QuitGame()
     {

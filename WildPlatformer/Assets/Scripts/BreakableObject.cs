@@ -6,22 +6,22 @@ using UnityEngine.U2D;
 
 public class BreakableObject : MonoBehaviour
 {
-    [SerializeField] Color _spriteColor;
-    [SerializeField] SpriteRenderer _sr;
-    [SerializeField] float _health;
-    [SerializeField] SpriteShapeRenderer _srShape;
+    [SerializeField] Color spriteColor;
+    [SerializeField] SpriteRenderer sr;
+    [SerializeField] float health;
+    [SerializeField] SpriteShapeRenderer srShape;
 
-    Vector2 _srStartScale;
+    Vector2 srStartScale;
 
     private void Start()
     {
-        if (_sr != null)
+        if (sr != null)
         {
-            _srStartScale = _sr.transform.localScale;
+            srStartScale = sr.transform.localScale;
         }
         else
         {
-            _srStartScale = _srShape.transform.localScale;
+            srStartScale = srShape.transform.localScale;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +35,7 @@ public class BreakableObject : MonoBehaviour
 
     private void Update()
     {
-        if(_health <= 0)
+        if(health <= 0)
         {
             DestroyMyself();
         }
@@ -43,31 +43,31 @@ public class BreakableObject : MonoBehaviour
 
     void TakeDamage()
     {
-        _health--;
+        health--;
         ToOriginalSize();
-        if(_sr != null)
+        if(sr != null)
         {
-            _sr.color = Color.white;
-            _sr.transform.DOScale(0.6f, 0.1f).SetId("scale").OnComplete(ToOriginalSize);
+            sr.color = Color.white;
+            sr.transform.DOScale(0.6f, 0.1f).SetId("scale").OnComplete(ToOriginalSize);
         }
         else
         {
-            _srShape.color = Color.white;
-            _srShape.transform.DOScale(0.6f, 0.1f).SetId("scale").OnComplete(ToOriginalSize);
+            srShape.color = Color.white;
+            srShape.transform.DOScale(0.6f, 0.1f).SetId("scale").OnComplete(ToOriginalSize);
         }
     }
     void ToOriginalSize()
     {
         DOTween.Kill("scale");
-        if (_sr != null)
+        if (sr != null)
         {
-            _sr.color = _spriteColor;
-            _sr.transform.localScale = _srStartScale;
+            sr.color = spriteColor;
+            sr.transform.localScale = srStartScale;
         }
         else
         {
-            _srShape.color = _spriteColor;
-            _srShape.transform.localScale = _srStartScale;
+            srShape.color = spriteColor;
+            srShape.transform.localScale = srStartScale;
         }
     }
     
