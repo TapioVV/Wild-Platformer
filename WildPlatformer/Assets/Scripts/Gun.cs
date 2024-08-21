@@ -1,43 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] GameObject _bulletPrefab;
-    AudioSource _as;
-    [SerializeField] AudioClip SHOOTSOUND;
-    float _shootingTimer;
-    [SerializeField] float _shootingCooldown;
-    bool _shootingActivated = false;
+    [SerializeField] GameObject bulletPrefab;
+    AudioSource audioSource;
+    [SerializeField] AudioClip ShootSound;
+    float shootingTimer;
+    [SerializeField] float shootingCooldown;
+    bool shootingActivated = false;
+    [SerializeField] Transform gunPivotTransform;
+    [SerializeField] Transform playerTransform;
 
     private void Start()
     {
-        _as = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
-        _shootingTimer = Mathf.MoveTowards(_shootingTimer, -1, Time.deltaTime);
+        shootingTimer = Mathf.MoveTowards(shootingTimer, -1, Time.deltaTime);
 
-        if(_shootingActivated == true)
+        if(shootingActivated == true)
         {
-            if (_shootingTimer <= 0)
+            if (shootingTimer <= 0)
             {
-                _as.PlayOneShot(SHOOTSOUND);
-                Instantiate(_bulletPrefab, transform.position, transform.rotation);
-                _shootingTimer = _shootingCooldown;
+                audioSource.PlayOneShot(ShootSound);
+                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                shootingTimer = shootingCooldown;
             }
         }
     }
-
     public void ShootInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            _shootingActivated = true;
+            shootingActivated = true;
         }
         if (context.canceled)
         {
-            _shootingActivated = false;
+            shootingActivated = false;
+        }
+    }
+    public void MouseAim(InputAction.CallbackContext context)
+    {
+
+        Debug.Log("Jee");
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+
+        float angle = Mathf.Atan2(playerTransform.position.y - mousePosition.y, playerTransform.position.x - mousePosition.x) * Mathf.Rad2Deg + 90;
+        gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
+    }
+    public void ControllerAim(InputAction.CallbackContext context)
+    {
+        if (!context.canceled && context.ReadValue<Vector2>() != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(context.ReadValue<Vector2>().y, context.ReadValue<Vector2>().x) * Mathf.Rad2Deg - 90;
+            gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
         }
     }
 }
