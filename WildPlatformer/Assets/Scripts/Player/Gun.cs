@@ -44,11 +44,11 @@ public class Gun : MonoBehaviour
             shootingActivated = false;
         }
     }
-    void StartShoot(InputAction.CallbackContext context)
-    {
-        shootingActivated = true;
-    }
     void StopShoot(InputAction.CallbackContext context)
+    {
+        shootingActivated = false;
+    }
+    void StartShoot(InputAction.CallbackContext context)
     {
         shootingActivated = true;
     }
@@ -68,15 +68,15 @@ public class Gun : MonoBehaviour
     }
     private void OnEnable()
     {
-        shoot.action.canceled += StartShoot;
-        shoot.action.started += StopShoot;
+        shoot.action.canceled += StopShoot;
+        shoot.action.started += StartShoot;
         controllerAim.action.performed += ControllerAim;
         mouseAim.action.performed += MouseAim;
     }
     private void OnDisable()
     {
-        shoot.action.canceled -= StartShoot;
-        shoot.action.started -= StopShoot;
+        shoot.action.canceled -= StopShoot;
+        shoot.action.started -= StartShoot;
         controllerAim.action.performed -= ControllerAim;
         mouseAim.action.performed -= MouseAim;
     }

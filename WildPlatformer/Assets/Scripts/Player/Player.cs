@@ -33,14 +33,21 @@ public class Player : MonoBehaviour
 
     int inputAxis;
 
-    float jumpTimer = 0;
-    [SerializeField] float jumpTimerAmount;
+    float jumpBufferTimer = 0;
+    [SerializeField] float jumpInputBuffer;
     public bool grounded;
 
     Rigidbody2D rb2D;
     BoxCollider2D boxCollider;
     Animator animator;
     SpriteRenderer spriteRenderer;
+
+    [Header("Inputs")]
+    [SerializeField] InputActionReference move;
+    [SerializeField] InputActionReference jump;
+
+
+
 
     #region Inputs
     public void MoveInput(InputAction.CallbackContext context)
@@ -67,6 +74,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        move.action.performed += MoveInput;
+        jump.action.started += PressJump;
+
+        jump.action.canceled += ReleaseJump;
+    }
+    private void OnDisable()
+    {
+        move.action.performed -= MoveInput;
+        jump.action.started -= PressJump;
+
+        jump.action.canceled -= ReleaseJump;
+    }
 
     #endregion
     void Start()
@@ -93,7 +114,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        jumpTimer = Mathf.MoveTowards(jumpTimer, -1, Time.deltaTime);
+        jumpBufferTimer = Mathf.MoveTowards(jumpBufferTimer, -1, Time.deltaTime);
 
         switch (currentState)
         {
@@ -117,14 +138,11 @@ public class Player : MonoBehaviour
                 rb2D.velocity = Vector2.zero;
                 break;
         }
-
-        if (jumpTimer > 0 && jumpPressed == true)
+        if (jumpBufferTimer > 0 && jumpPressed == true)
         {
             if (currentState == STATES.IDLE || currentState == STATES.RUN)
             {
-                jumpPressed = false;
-                velocity.y = jumpSpeed;
-                currentState = STATES.JUMP;
+                Jump(1f);
             }
         }
 
@@ -177,20 +195,24 @@ public class Player : MonoBehaviour
             currentState = STATES.FALL;
         }
     }
-    public void JumpEnter(InputAction.CallbackContext context)
+    public void PressJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        jumpPressed = true;
+        jumpBufferTimer = jumpInputBuffer;
+    }
+    public void ReleaseJump(InputAction.CallbackContext context)
+    {
+        jumpPressed = false;
+        if (currentState == STATES.JUMP)
         {
-            jumpPressed = true;
-            jumpTimer = jumpTimerAmount;
+            velocity.y = velocity.y * smallJump;
         }
-        if (context.canceled)
-        {
-            if (currentState == STATES.JUMP)
-            {
-                velocity.y = velocity.y * smallJump;
-            }
-        }
+    }
+    public void Jump(float multiplier)
+    {
+        jumpPressed = false;
+        velocity.y = jumpSpeed * multiplier;
+        currentState = STATES.JUMP;
     }
     void Jumping()
     {

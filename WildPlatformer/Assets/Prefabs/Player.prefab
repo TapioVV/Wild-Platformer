@@ -534,9 +534,10 @@ MonoBehaviour:
   smallJump: 0.5
   maxVerticalSpeed: 50
   velocity: {x: 0, y: 0}
-  jumpTimerAmount: 0.05
+  jumpInputBuffer: 0
   grounded: 0
-  gunPivotTransform: {fileID: 3304347579617761292}
+  move: {fileID: 4451190145840997014, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
+  jump: {fileID: 6993509728658724309, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
 --- !u!95 &3304347580209893194
 Animator:
   serializedVersion: 5
