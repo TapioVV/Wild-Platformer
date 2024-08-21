@@ -42,14 +42,9 @@ public class Player : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
 
-    [SerializeField] Transform gunPivotTransform;
-
-
-
     #region Inputs
     public void MoveInput(InputAction.CallbackContext context)
     {
-        Debug.Log("JAAA");
         inputAxis = (int)context.ReadValue<float>();
     }
     public void ResetAfterDeathInput(InputAction.CallbackContext context)
