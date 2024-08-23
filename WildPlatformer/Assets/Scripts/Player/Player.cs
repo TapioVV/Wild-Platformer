@@ -208,9 +208,19 @@ public class Player : MonoBehaviour
             velocity.y = velocity.y * smallJump;
         }
     }
+    public void JumpOnBouncePad(float bigJump, float smallJump)
+    {
+        if (jumpPressed)
+        {
+            Jump(bigJump);
+        }
+        if (!jumpPressed)
+        {
+            Jump(smallJump);
+        }
+    }
     public void Jump(float multiplier)
     {
-        jumpPressed = false;
         velocity.y = jumpSpeed * multiplier;
         currentState = STATES.JUMP;
     }

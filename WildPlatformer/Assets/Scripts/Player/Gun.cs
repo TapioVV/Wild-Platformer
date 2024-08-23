@@ -9,12 +9,13 @@ public class Gun : MonoBehaviour
     float shootingTimer;
     [SerializeField] float shootingCooldown;
     bool shootingActivated = false;
-    [SerializeField] Transform gunPivotTransform;
+
+    [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] Transform playerTransform;
 
     [Header("Inputs")]
     [SerializeField] InputActionReference shoot;
-    [SerializeField] InputActionReference controllerAim;
-    [SerializeField] InputActionReference mouseAim;
+
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class Gun : MonoBehaviour
             if (shootingTimer <= 0)
             {
 
-                Instantiate(bulletPrefab, transform.position, gunPivotTransform.rotation);
+                Instantiate(bulletPrefab, transform.position, bulletSpawnPoint.rotation, playerTransform);
                 shootingTimer = shootingCooldown;
             }
         }
@@ -52,33 +53,15 @@ public class Gun : MonoBehaviour
     {
         shootingActivated = true;
     }
-    public void MouseAim(InputAction.CallbackContext context)
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
-        float angle = Mathf.Atan2(transform.position.y - mousePosition.y, transform.position.x - mousePosition.x) * Mathf.Rad2Deg + 90;
-        gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
-    }
-    public void ControllerAim(InputAction.CallbackContext context)
-    {
-        if (!context.canceled && context.ReadValue<Vector2>() != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(context.ReadValue<Vector2>().y, context.ReadValue<Vector2>().x) * Mathf.Rad2Deg - 90;
-            gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
-        }
-    }
     private void OnEnable()
     {
-        shoot.action.canceled += StopShoot;
         shoot.action.started += StartShoot;
-        controllerAim.action.performed += ControllerAim;
-        mouseAim.action.performed += MouseAim;
+        shoot.action.canceled += StopShoot;
     }
     private void OnDisable()
     {
-        shoot.action.canceled -= StopShoot;
         shoot.action.started -= StartShoot;
-        controllerAim.action.performed -= ControllerAim;
-        mouseAim.action.performed -= MouseAim;
+        shoot.action.canceled -= StopShoot;
     }
 }
 

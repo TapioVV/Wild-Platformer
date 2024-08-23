@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4777080326384895923}
   - component: {fileID: 3374662713050212414}
+  - component: {fileID: 1198128285283615029}
+  - component: {fileID: 6232988827799821317}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -48,8 +50,38 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5076967964058534910, guid: 14aee7e232e801143a3ad318c2f37216, type: 3}
   shootSound: {fileID: 8300000, guid: 7fdb343a12d907747b42302310fae4d2, type: 3}
   shootingCooldown: 0.1
-  gunPivotTransform: {fileID: 3304347579617761292}
+  bulletSpawnPoint: {fileID: 5830295386865593455}
   shoot: {fileID: -3701824410152222434, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
+--- !u!114 &1198128285283615029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047462827180334703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44616b59a078314182bb1c826472233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5076967964058534910, guid: 14aee7e232e801143a3ad318c2f37216, type: 3}
+  shootSound: {fileID: 8300000, guid: 7fdb343a12d907747b42302310fae4d2, type: 3}
+  shootingCooldown: 1
+  bulletSpawnPoint: {fileID: 5830295386865593455}
+  shoot: {fileID: 9049944762678953917, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
+--- !u!114 &6232988827799821317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047462827180334703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50f34b6696b9492a8a7d3e834cafb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPivotTransform: {fileID: 3304347579617761292}
   controllerAim: {fileID: -8540298094676166018, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
   mouseAim: {fileID: -7590333751699732479, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
 --- !u!1 &3304347578971541598
@@ -166,6 +198,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5830295386865593455}
   - {fileID: 3304347578971541585}
   m_Father: {fileID: 4777080326384895923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -532,9 +565,9 @@ MonoBehaviour:
   jumpHeight: 8.5
   jumpDistance: 25
   smallJump: 0.5
-  maxVerticalSpeed: 50
+  maxVerticalSpeed: 80
   velocity: {x: 0, y: 0}
-  jumpInputBuffer: 0
+  jumpInputBuffer: 0.05
   grounded: 0
   move: {fileID: 4451190145840997014, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
   jump: {fileID: 6993509728658724309, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
@@ -559,3 +592,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &4436872921080490692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5830295386865593455}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5830295386865593455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4436872921080490692}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7620001, z: 0}
+  m_LocalScale: {x: 0.334, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3304347579617761292}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

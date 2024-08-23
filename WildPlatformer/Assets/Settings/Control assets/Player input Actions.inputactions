@@ -33,9 +33,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "PrimaryShoot",
                     "type": "Button",
                     "id": "fffd54ee-c847-4cba-ba7c-b98f56873bdc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AlternateShoot",
+                    "type": "Button",
+                    "id": "4d695aa3-dd31-4c1b-9350-b506df274f41",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -240,40 +249,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa7af969-4b04-45af-9b29-cb124b185724",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
+                    "action": "PrimaryShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "bfac7c88-fe2c-4536-bd3e-284e396f6072",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "629a9405-0054-4164-b4e5-1f70c30f47a6",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "PrimaryShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -582,6 +569,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2e67d2c-8fec-4858-ac54-6f0ae371f11b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlternateShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4f2e457-2e8b-4096-8302-5f7261f39adb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlternateShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
