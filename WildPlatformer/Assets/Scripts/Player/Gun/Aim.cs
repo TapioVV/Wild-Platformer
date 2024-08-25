@@ -14,7 +14,6 @@ public class Aim : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         float angle = Mathf.Atan2(transform.position.y - mousePosition.y, transform.position.x - mousePosition.x) * Mathf.Rad2Deg + 90;
-        Debug.Log(angle);
         gunPivotTransform.localRotation = Quaternion.Euler(0, 0, angle);
     }
     public void ControllerAim(InputAction.CallbackContext context)

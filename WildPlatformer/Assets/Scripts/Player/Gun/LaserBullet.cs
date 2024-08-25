@@ -14,13 +14,10 @@ public class LaserBullet : MonoBehaviour
     [SerializeField] AnimationCurve bulletSizeCurve;
 
     [SerializeField] GameObject LaserHitEffectPrefab;
-
-    
     
     void Start()
     {
         RaycastHit2D hit2D = Physics2D.Raycast(transform.position, transform.up,10000, hittableThings);
-        
 
         if(hit2D.collider == null)
         {
@@ -36,13 +33,19 @@ public class LaserBullet : MonoBehaviour
     }
     void ShootLaser(Vector2 lineEndPosition)
     {
+        if(Mathf.Abs(transform.rotation.z) > 140)
+        {
+            OnLaserJump?.Invoke(laserJumpAmount);
+        }
+        
+
         line.SetPosition(0, transform.position);
         line.SetPosition(1, lineEndPosition);
-        OnLaserJump?.Invoke(laserJumpAmount);
     }
     void DestroyMyself()
     {
         DOTween.Kill(this);
+        
         Destroy(gameObject);
     }
 }
