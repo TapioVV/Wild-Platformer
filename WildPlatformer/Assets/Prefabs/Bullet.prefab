@@ -181,7 +181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5076967964058534910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b890c5c23471644951074af7b29aed, type: 3}
+  m_Script: {fileID: 11500000, guid: eaa3d729b8f0d4073813769e8fcca88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSizeCurve:
@@ -190,28 +190,37 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0.07826385
+      outSlope: 0.07826385
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.73897177
+      value: 0.057834774
+      inSlope: 0.33264974
+      outSlope: 0.33264974
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16395132
+      outWeight: 0.4129764
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 3.6094382
+      outSlope: 3.6094382
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 28.63
-  lifeTime: 6.37
-  hitEffectDuration: 1.86
-  hitEffectSizeMultiplier: 2.31
+  speed: 90
+  lifeTime: 0.4
+  hitEffectDuration: 0.5
+  hitEffectSizeMultiplier: 4
 --- !u!50 &5076967964058534880
 Rigidbody2D:
   serializedVersion: 4

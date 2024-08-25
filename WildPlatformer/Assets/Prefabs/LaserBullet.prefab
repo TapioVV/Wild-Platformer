@@ -154,7 +154,7 @@ MonoBehaviour:
   hittableThings:
     serializedVersion: 2
     m_Bits: 64
-  lifeTime: 0.1
+  lifeTime: 5
   bulletSizeCurve:
     serializedVersion: 2
     m_Curve:
