@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a406aa9716a4a5f838f1ed49f00b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserJumpAmount: 0.75
   line: {fileID: 2812776694567604592}
   hittableThings:
     serializedVersion: 2

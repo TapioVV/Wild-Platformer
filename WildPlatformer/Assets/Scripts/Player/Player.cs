@@ -46,9 +46,6 @@ public class Player : MonoBehaviour
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference jump;
 
-
-
-
     #region Inputs
     public void MoveInput(InputAction.CallbackContext context)
     {
@@ -58,6 +55,7 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
+
         }
     }
     public void ResetInput(InputAction.CallbackContext context)
@@ -78,6 +76,7 @@ public class Player : MonoBehaviour
     {
         move.action.performed += MoveInput;
         jump.action.started += PressJump;
+        LaserBullet.OnLaserJump += Jump;
 
         jump.action.canceled += ReleaseJump;
     }
@@ -224,6 +223,7 @@ public class Player : MonoBehaviour
         velocity.y = jumpSpeed * multiplier;
         currentState = STATES.JUMP;
     }
+ 
     void Jumping()
     {
         animator.CrossFade("character_jump_animation", 0, 0);
