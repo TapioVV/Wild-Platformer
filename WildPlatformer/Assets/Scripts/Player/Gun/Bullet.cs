@@ -6,11 +6,12 @@ using DG.Tweening;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] AnimationCurve bulletSizeCurve;
+    [SerializeField] LayerMask hittableThings;
     [SerializeField] float speed;
     [SerializeField] float lifeTime;
+    [SerializeField] GameObject hitEffectPrefab;
     float lifeTimeTimer;
-    [SerializeField] float hitEffectDuration;
-    [SerializeField] float hitEffectSizeMultiplier;
+        
     Rigidbody2D rb2D;
     CircleCollider2D circleCollider;
 
@@ -37,19 +38,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Breakable")
-        {
-            circleCollider.enabled = false;
             DOTween.Kill("normal");
             HitSomething();
-        }
     }
 
     void HitSomething()
     {
-        transform.localScale = Vector2.one * hitEffectSizeMultiplier;
-        rb2D.velocity = Vector2.zero;
-        transform.DOScale(0, hitEffectDuration).OnComplete(DestroyMyself);
+        Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        DestroyMyself();
     }
 
     void DestroyMyself()
