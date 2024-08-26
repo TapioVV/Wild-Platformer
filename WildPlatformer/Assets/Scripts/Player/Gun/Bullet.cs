@@ -19,8 +19,9 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        
         lifeTimeTimer = lifeTime;
-
+        
         circleCollider = GetComponent<CircleCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         rb2D.velocity = transform.up * speed;

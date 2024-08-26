@@ -47,10 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44616b59a078314182bb1c826472233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 5076967964058534910, guid: 14aee7e232e801143a3ad318c2f37216, type: 3}
+  bulletPrefab: {fileID: 5076967964058534910, guid: c89f7cb6bba72416b8a802494ef4b82c, type: 3}
   shootSound: {fileID: 8300000, guid: 7fdb343a12d907747b42302310fae4d2, type: 3}
-  shootingCooldown: 0.1
+  shootingCooldown: 1
   bulletSpawnPoint: {fileID: 5830295386865593455}
+  playerTransform: {fileID: 3304347580209893239}
   shoot: {fileID: -3701824410152222434, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
 --- !u!114 &1198128285283615029
 MonoBehaviour:
@@ -64,10 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44616b59a078314182bb1c826472233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 5076967964058534910, guid: 14aee7e232e801143a3ad318c2f37216, type: 3}
+  bulletPrefab: {fileID: 5076967964058534910, guid: 1a8230beeda79481199e6694bb8cb6a1, type: 3}
   shootSound: {fileID: 8300000, guid: 7fdb343a12d907747b42302310fae4d2, type: 3}
   shootingCooldown: 1
   bulletSpawnPoint: {fileID: 5830295386865593455}
+  playerTransform: {fileID: 3304347580209893239}
   shoot: {fileID: 9049944762678953917, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
 --- !u!114 &6232988827799821317
 MonoBehaviour:

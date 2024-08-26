@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
         {
             if (shootingTimer <= 0)
             {
-                Instantiate(bulletPrefab, transform.position, bulletSpawnPoint.rotation);
+                Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, playerTransform);
                 shootingTimer = shootingCooldown;
             }
         }

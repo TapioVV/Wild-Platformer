@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8963605440903284040}
   - component: {fileID: 8963605440903284041}
   m_Layer: 6
-  m_Name: BreakableWall
+  m_Name: BreakableWallred
   m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8963605440903284044}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 152.5, y: 8.75, z: 0}
   m_LocalScale: {x: 2, y: 10, z: 1}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 8963605440979156938}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8963605440903284040
 MonoBehaviour:
@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2dc9930f436034ba30972a714bbd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteColor: {r: 0.9411765, g: 0.85490197, b: 0.35686275, a: 1}
-  _sr: {fileID: 8963605440979156939}
-  _health: 4
-  _srShape: {fileID: 0}
+  health: 2
+  sr: {fileID: 8963605440979156939}
+  srShape: {fileID: 0}
+  scaleMultiplier: 1.1
+  scaleTime: 0.1
 --- !u!61 &8963605440903284041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60,6 +61,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4096
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -100,13 +120,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8963605440979156940}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8963605440903284042}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8963605440979156939
 SpriteRenderer:
@@ -150,7 +170,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.9411765, g: 0.85490197, b: 0.35686275, a: 1}
+  m_Color: {r: 1, g: 0.2968161, b: 0.25943398, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

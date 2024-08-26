@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5076967964058534885}
   - component: {fileID: 2812776694567604592}
   - component: {fileID: 7647171099555959963}
-  m_Layer: 7
-  m_Name: LaserBullet
+  m_Layer: 11
+  m_Name: RedLaser
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Positions:
   - {x: 3.654017, y: 1.9146509, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -98,8 +98,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.2028302, b: 0.29711902, a: 1}
+      key1: {r: 1, g: 0.2028302, b: 0.29711902, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -123,11 +123,11 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 1
-    numCapVertices: 0
+    numCapVertices: 6
     alignment: 1
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -154,7 +154,7 @@ MonoBehaviour:
   hittableThings:
     serializedVersion: 2
     m_Bits: 64
-  lifeTime: 5
+  lifeTime: 0.22
   bulletSizeCurve:
     serializedVersion: 2
     m_Curve:
@@ -188,4 +188,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  hitEffectPrefab: {fileID: 5076967964058534910, guid: ffb171504f4144b2bbb8affd2d176d5a, type: 3}
+  hitEffectPrefab: {fileID: 5076967964058534910, guid: aa862b430f3424b5e9b6ead976c6f43f, type: 3}
