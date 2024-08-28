@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public static event Action OnPlayerDeath;
+    [SerializeField] public static event Action OnPlayerDeath;
+    [SerializeField] UnityEvent OnPlayerDeathUnityEvent;
 
     [SerializeField] LayerMask groundLayerMask;
     enum STATES { IDLE, RUN, JUMP, FALL, DEAD }
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
     BoxCollider2D boxCollider;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    [SerializeField] ParticleSystem particleSystem;
 
     [Header("Inputs")]
     [SerializeField] InputActionReference move;
@@ -95,6 +98,7 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particleSystem = GetComponent<ParticleSystem>();
 
         currentState = STATES.IDLE;
 
@@ -107,7 +111,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Death")
         {
+            rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+            rb2D.velocity = Vector2.zero;
             OnPlayerDeath?.Invoke();
+            OnPlayerDeathUnityEvent.Invoke();
             currentState = STATES.DEAD;
         }
     }
@@ -135,6 +142,7 @@ public class Player : MonoBehaviour
             case STATES.DEAD:
                 rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
                 rb2D.velocity = Vector2.zero;
+
                 break;
         }
         if (jumpBufferTimer > 0 && jumpPressed == true)
@@ -223,7 +231,7 @@ public class Player : MonoBehaviour
         velocity.y = jumpSpeed * multiplier;
         currentState = STATES.JUMP;
     }
- 
+
     void Jumping()
     {
         animator.CrossFade("character_jump_animation", 0, 0);
