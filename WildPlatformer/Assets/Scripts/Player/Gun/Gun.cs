@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 public class Gun : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
@@ -15,6 +16,8 @@ public class Gun : MonoBehaviour
 
     [Header("Inputs")]
     [SerializeField] InputActionReference shoot;
+    [Header("SoundEvents")]
+    [SerializeField] UnityEvent OnShoot;
 
 
     private void Start()
@@ -28,6 +31,7 @@ public class Gun : MonoBehaviour
         {
             if (shootingTimer <= 0)
             {
+                OnShoot?.Invoke();
                 Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, playerTransform);
                 shootingTimer = shootingCooldown;
             }

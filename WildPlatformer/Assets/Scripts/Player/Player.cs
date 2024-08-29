@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] public static event Action OnPlayerDeath;
+    [SerializeField] UnityEvent OnPlayerWin;
     [SerializeField] UnityEvent OnPlayerDeathUnityEvent;
 
     [SerializeField] LayerMask groundLayerMask;
@@ -48,6 +49,10 @@ public class Player : MonoBehaviour
     [Header("Inputs")]
     [SerializeField] InputActionReference move;
     [SerializeField] InputActionReference jump;
+
+    [Header("SoundEvents")]
+    [SerializeField] UnityEvent OnPlayerNormalJump;
+    [SerializeField] UnityEvent OnPlayerBouncePadJump;
 
     #region Inputs
     public void MoveInput(InputAction.CallbackContext context)
@@ -117,6 +122,13 @@ public class Player : MonoBehaviour
             OnPlayerDeathUnityEvent.Invoke();
             currentState = STATES.DEAD;
         }
+        if (collision.gameObject.tag == "Win")
+        {
+            rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+            rb2D.velocity = Vector2.zero;
+            OnPlayerWin.Invoke();
+            currentState = STATES.DEAD;
+        }
     }
     private void Update()
     {
@@ -149,6 +161,7 @@ public class Player : MonoBehaviour
         {
             if (currentState == STATES.IDLE || currentState == STATES.RUN)
             {
+                OnPlayerNormalJump?.Invoke();
                 Jump(1f);
             }
         }
@@ -217,6 +230,7 @@ public class Player : MonoBehaviour
     }
     public void JumpOnBouncePad(float bigJump, float smallJump)
     {
+        OnPlayerBouncePadJump?.Invoke();
         if (jumpPressed)
         {
             Jump(bigJump);
