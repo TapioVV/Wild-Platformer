@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ControllerAim",
-                    "type": "Value",
-                    "id": "20a75175-335b-4f76-89d1-379ba98caf4c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "MouseAim",
                     "type": "Value",
                     "id": "38fdbe5a-b62d-4c57-8bbc-9b7f0a4b294b",
@@ -85,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ControllerRightStickAIm",
+                    "type": "Value",
+                    "id": "489b1777-cc18-460c-ad5a-7981aca24976",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ControllerLeftStickAIm",
+                    "type": "Value",
+                    "id": "5cdc2f3e-6d50-43d7-b646-cbf515e1b231",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -222,17 +231,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b0a813fc-c60e-481a-a3f9-3c862c94bf04",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "StickDeadzone(min=0.5,max=0.925)",
-                    "groups": "",
-                    "action": "ControllerAim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6eb74150-c119-4bf6-b01c-72c9acd68f8a",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -261,28 +259,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "PrimaryShoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4c7d7e5d-6fb3-4737-a181-9961a770e3f9",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "efb17985-55e6-4fc6-beb7-cb8437a74e2b",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -334,6 +310,17 @@
                     "name": "",
                     "id": "e7972e9f-5bac-4481-977a-83c2846ddf53",
                     "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6c947f7-5710-40f9-9fdf-69bf98a843a4",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -497,50 +484,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0f068bf6-bb58-4109-ab48-2b08b1fecbfa",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f08ee360-74ed-4df2-9d83-df1fa8c53bc6",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0cdd8956-ebce-4c8f-84ea-9c84242df2e6",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3c4ab773-5fb8-4dec-aae3-ecd89068e742",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f77d315b-491b-4843-a179-975348348f60",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -575,7 +518,7 @@
                 {
                     "name": "",
                     "id": "e2e67d2c-8fec-4858-ac54-6f0ae371f11b",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -586,11 +529,44 @@
                 {
                     "name": "",
                     "id": "a4f2e457-2e8b-4096-8302-5f7261f39adb",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "AlternateShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "252a3399-d86c-426a-9c38-3410fb74849f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7be57c1-d435-4a46-bf2c-6e59424676e4",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.5,max=0.925)",
+                    "groups": "",
+                    "action": "ControllerRightStickAIm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12ec0b0a-f03f-473b-a26b-55c7d8779130",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.5,max=0.925)",
+                    "groups": "",
+                    "action": "ControllerLeftStickAIm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

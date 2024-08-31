@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5854962135891571233, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.374525
+      value: 18.39684
       objectReference: {fileID: 0}
     - target: {fileID: 5854962136561954809, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -277,6 +277,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8905600516464584164, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: LeftStickAim
+      value: 
+      objectReference: {fileID: -508956034996479231, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
+    - target: {fileID: 8905600516464584164, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: RightStickAim
+      value: 
+      objectReference: {fileID: 1116962937102552039, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
+    - target: {fileID: 8905600516464584164, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: controllerAim
+      value: 
+      objectReference: {fileID: -508956034996479231, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5854962136561954811, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
