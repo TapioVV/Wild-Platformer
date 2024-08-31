@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class WinWall : MonoBehaviour
 {
@@ -14,4 +15,5 @@ public class WinWall : MonoBehaviour
         audioSource.Play();
         transform.DOMoveY(cameraTransform.position.y, moveToMiddleSpeed).SetEase(easeCurve);
     }
+
 }
