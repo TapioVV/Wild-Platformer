@@ -6,7 +6,7 @@ using System;
 
 public class LaserBullet : MonoBehaviour
 {
-    
+
     public static Action<float> OnLaserJump;
     [SerializeField] float laserJumpAmount;
     [SerializeField] LineRenderer line;
@@ -15,12 +15,12 @@ public class LaserBullet : MonoBehaviour
     [SerializeField] AnimationCurve bulletSizeCurve;
 
     [SerializeField] GameObject hitEffectPrefab;
-    
+
     void Start()
     {
-        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, transform.up,10000, hittableThings);
+        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, transform.up, 10000, hittableThings);
 
-        if(hit2D.collider == null)
+        if (hit2D.collider == null)
         {
             ShootLaser(transform.position + transform.up * 200);
         }
@@ -34,7 +34,7 @@ public class LaserBullet : MonoBehaviour
     }
     void ShootLaser(Vector2 lineEndPosition)
     {
-        if(transform.eulerAngles.z > 140 && transform.eulerAngles.z < 220)
+        if (transform.eulerAngles.z > 130 && transform.eulerAngles.z < 230)
         {
             OnLaserJump?.Invoke(laserJumpAmount);
         }
@@ -45,7 +45,7 @@ public class LaserBullet : MonoBehaviour
     void DestroyMyself()
     {
         DOTween.Kill(this);
-        
+
         Destroy(gameObject);
     }
 }

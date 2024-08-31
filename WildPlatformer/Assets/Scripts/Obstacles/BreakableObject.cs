@@ -72,13 +72,7 @@ public class BreakableObject : MonoBehaviour
     void DestroyMyself()
     {
         DOTween.Kill("scale");
-        if (transform.parent != null)
-        {
-            Destroy(transform.parent.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        Destroy(gameObject);
     }
 }
