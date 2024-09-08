@@ -539,6 +539,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5914d3b5-da47-4e4d-b6e0-6cd2cb8cc883",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AlternateShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "252a3399-d86c-426a-9c38-3410fb74849f",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",

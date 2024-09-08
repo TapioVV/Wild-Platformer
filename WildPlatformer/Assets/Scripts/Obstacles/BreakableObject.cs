@@ -12,12 +12,15 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] SpriteShapeRenderer srShape;
     [SerializeField] float scaleMultiplier;
     [SerializeField] float scaleTime;
+    [SerializeField] float scaleTimeOnDeath;
+
+    BoxCollider2D boxCollider2D;
 
     Vector2 srStartScale;
 
     private void Start()
     {
-
+        boxCollider2D = GetComponent<BoxCollider2D>();
         if (sr != null)
         {
             srStartScale = sr.transform.localScale;
@@ -72,7 +75,12 @@ public class BreakableObject : MonoBehaviour
     void DestroyMyself()
     {
         DOTween.Kill("scale");
-
+        boxCollider2D.enabled = false;
+        sr.transform.DOScale(0, scaleTimeOnDeath).SetId("scale").OnComplete(ActuallyDestroyMyself);
+    }
+    void ActuallyDestroyMyself()
+    {
+        DOTween.Kill("scale");
         Destroy(gameObject);
     }
 }

@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2dc9930f436034ba30972a714bbd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
   sr: {fileID: 8963605440979156939}
   srShape: {fileID: 0}
   scaleMultiplier: 1.1
   scaleTime: 0.1
+  scaleTimeOnDeath: 0.225
 --- !u!61 &8963605440903284041
 BoxCollider2D:
   m_ObjectHideFlags: 0
