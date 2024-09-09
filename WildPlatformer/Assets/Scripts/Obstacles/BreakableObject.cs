@@ -13,6 +13,7 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] float scaleMultiplier;
     [SerializeField] float scaleTime;
     [SerializeField] float scaleTimeOnDeath;
+    float scaleTimerOnDeath;
 
     BoxCollider2D boxCollider2D;
 
@@ -20,6 +21,7 @@ public class BreakableObject : MonoBehaviour
 
     private void Start()
     {
+        scaleTimerOnDeath = scaleTimeOnDeath;
         boxCollider2D = GetComponent<BoxCollider2D>();
         if (sr != null)
         {
@@ -41,20 +43,22 @@ public class BreakableObject : MonoBehaviour
     void TakeDamage()
     {
         health--;
-        ToOriginalSize();
-        if (sr != null)
-        {
-            sr.color = Color.white;
-            sr.transform.DOScale(scaleMultiplier, scaleTime).SetId("scale").OnComplete(ToOriginalSize);
-        }
-        else
-        {
-            srShape.color = Color.white;
-            srShape.transform.DOScale(scaleMultiplier, scaleTime).SetId("scale").OnComplete(ToOriginalSize);
-        }
+        sr.color = Color.white;
         if (health <= 0)
         {
             DestroyMyself();
+        }
+    }
+    void Update()
+    {
+        if (health <= 0)
+        {
+            scaleTimerOnDeath -= Time.deltaTime;
+        }
+        if (scaleTimerOnDeath <= 0)
+        {
+            DOTween.Kill("scale");
+            Destroy(gameObject);
         }
     }
     void ToOriginalSize()
@@ -74,13 +78,13 @@ public class BreakableObject : MonoBehaviour
 
     void DestroyMyself()
     {
-        DOTween.Kill("scale");
         boxCollider2D.enabled = false;
         sr.transform.DOScale(0, scaleTimeOnDeath).SetId("scale").OnComplete(ActuallyDestroyMyself);
     }
     void ActuallyDestroyMyself()
     {
         DOTween.Kill("scale");
+
         Destroy(gameObject);
     }
 }
