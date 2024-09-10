@@ -1044,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 9.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3746956751805717426, guid: 616bee7dff7f00142bc5b79f6236701d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5010
+      objectReference: {fileID: 0}
     - target: {fileID: 3746956752369466896, guid: 616bee7dff7f00142bc5b79f6236701d, type: 3}
       propertyPath: m_Name
       value: DeathWall

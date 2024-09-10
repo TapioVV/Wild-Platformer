@@ -15,16 +15,16 @@ public class ReloadScene : MonoBehaviour
     [SerializeField] InputActionReference resetOnDeath;
     private void OnEnable()
     {
-        moveToMainMenu.action.started += ToMainMenu;
-        resetNormal.action.started += ResetGame;
-        resetOnDeath.action.started += ResetGameAfterDeath;
+        moveToMainMenu.action.performed += ToMainMenu;
+        resetNormal.action.performed += ResetGame;
+        resetOnDeath.action.performed += ResetGameAfterDeath;
         Player.OnPlayerDeath += PlayerDied;
     }
     private void OnDisable()
     {
-        moveToMainMenu.action.started -= ToMainMenu;
-        resetNormal.action.started -= ResetGame;
-        resetOnDeath.action.started -= ResetGameAfterDeath;
+        moveToMainMenu.action.performed -= ToMainMenu;
+        resetNormal.action.performed -= ResetGame;
+        resetOnDeath.action.performed -= ResetGameAfterDeath;
         Player.OnPlayerDeath -= PlayerDied;
     }
     void ResetGame(InputAction.CallbackContext context)

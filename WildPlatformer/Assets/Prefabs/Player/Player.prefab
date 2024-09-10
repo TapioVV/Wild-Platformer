@@ -1094,7 +1094,7 @@ MonoBehaviour:
   smallJump: 0.5
   maxVerticalSpeed: 80
   velocity: {x: 0, y: 0}
-  jumpInputBuffer: 0.05
+  jumpInputBuffer: 0.1
   grounded: 0
   particleSystem: {fileID: 9204714463108858290}
   move: {fileID: 4451190145840997014, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
