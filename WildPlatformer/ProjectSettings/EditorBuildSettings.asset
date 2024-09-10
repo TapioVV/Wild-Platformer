@@ -11,11 +11,29 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/Tutorial.unity
     guid: 617ded68c53938044b0ec2b975d2ba6e
-  - enabled: 0
-    path: Assets/Scenes/Stage_1.unity
-    guid: c1d811049a2fe574182a9f3a29f10612
-  - enabled: 0
-    path: Assets/Scenes/Stage_2.unity
-    guid: 932574ec9485b79488343f9347a22828
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 1.unity
+    guid: f31bf32f5828b4d5db59f2528f4fddca
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 2.unity
+    guid: 2fdd85bbbf9cb41c99cb1f17f62709c4
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 3.unity
+    guid: 345ed05aeabca43168a6ebe1693d5751
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 4.unity
+    guid: 42f8c69b00f5e4b08a66cbed5cd77187
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 5.unity
+    guid: 27bdb895d08ca4d8eacae8efab6d05ac
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 6.unity
+    guid: dc6a6fdb8276b409890f494eea394f6c
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 7.unity
+    guid: e4f2760be69424d438668851ec91b48a
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage 8.unity
+    guid: 3de648117d3294c638adc14b7f65ce39
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 33514c577b366483f85828bac4e9a129, type: 2}

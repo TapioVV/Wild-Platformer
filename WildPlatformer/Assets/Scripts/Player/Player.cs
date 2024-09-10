@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] public static event Action OnPlayerDeath;
+    [SerializeField] public static event Action OnWin;
     [SerializeField] UnityEvent OnPlayerWin;
     [SerializeField] UnityEvent OnPlayerDeathUnityEvent;
 
@@ -59,12 +60,6 @@ public class Player : MonoBehaviour
     {
         inputAxis = (int)context.ReadValue<float>();
     }
-    public void LeaveToMenuInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-        }
-    }
 
     private void OnEnable()
     {
@@ -113,6 +108,7 @@ public class Player : MonoBehaviour
             rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
             rb2D.velocity = Vector2.zero;
             OnPlayerWin.Invoke();
+            OnWin?.Invoke();
             currentState = STATES.DEAD;
         }
     }

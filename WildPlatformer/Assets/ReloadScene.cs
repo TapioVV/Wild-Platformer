@@ -10,6 +10,7 @@ public class ReloadScene : MonoBehaviour
     [SerializeField] ScreenFade screenFade;
     bool triedToReset = false;
     bool playerIsDead = false;
+    bool playerWon = false;
     [SerializeField] InputActionReference moveToMainMenu;
     [SerializeField] InputActionReference resetNormal;
     [SerializeField] InputActionReference resetOnDeath;
@@ -19,6 +20,7 @@ public class ReloadScene : MonoBehaviour
         resetNormal.action.performed += ResetGame;
         resetOnDeath.action.performed += ResetGameAfterDeath;
         Player.OnPlayerDeath += PlayerDied;
+        Player.OnWin += PlayerWon;
     }
     private void OnDisable()
     {
@@ -26,6 +28,7 @@ public class ReloadScene : MonoBehaviour
         resetNormal.action.performed -= ResetGame;
         resetOnDeath.action.performed -= ResetGameAfterDeath;
         Player.OnPlayerDeath -= PlayerDied;
+        Player.OnWin -= PlayerWon;
     }
     void ResetGame(InputAction.CallbackContext context)
     {
@@ -37,26 +40,49 @@ public class ReloadScene : MonoBehaviour
     }
     void ResetGameAfterDeath(InputAction.CallbackContext context)
     {
+        LoadAScene();
+    }
+    void ToMainMenu(InputAction.CallbackContext context)
+    {
+        playerWon = true;
+        LoadAScene();
+    }
+    void PlayerDied()
+    {
+        playerIsDead = true;
+    }
+    void PlayerWon()
+    {
+        playerWon = true;
+    }
+    void LoadAScene()
+    {
         if (playerIsDead && triedToReset == false)
         {
             triedToReset = true;
             screenFade.FadeToDark();
         }
-    }
-    void ToMainMenu(InputAction.CallbackContext context)
-    {
-
-    }
-    void PlayerDied()
-    {
-        playerIsDead = true;
+        if (playerWon && triedToReset == false)
+        {
+            triedToReset = true;
+            screenFade.FadeToDark();
+        }
     }
     public void ReloadThisScene()
     {
         DOTween.KillAll();
         if (triedToReset == true)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (playerWon)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else if (!playerWon)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
         }
+
     }
 }

@@ -29,10 +29,10 @@ public class MainMenu : MonoBehaviour
     }
     public void LoadStage()
     {
-        SceneManager.LoadScene(stageSelectSceneNumber);
+        SceneManager.LoadScene(1 + stageSelectSceneNumber);
     }
 
-    
+
 
     public void TutorialButtonPress()
     {
