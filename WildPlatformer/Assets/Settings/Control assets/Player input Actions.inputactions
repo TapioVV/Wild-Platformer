@@ -484,6 +484,28 @@
                 },
                 {
                     "name": "",
+                    "id": "186543f9-b80d-4d93-b2b0-644d942924de",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76571745-fa18-4f0e-8883-901f67467609",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f77d315b-491b-4843-a179-975348348f60",
                     "path": "<Gamepad>/start",
                     "interactions": "",

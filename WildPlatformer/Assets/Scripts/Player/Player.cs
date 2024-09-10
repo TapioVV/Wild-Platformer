@@ -59,20 +59,6 @@ public class Player : MonoBehaviour
     {
         inputAxis = (int)context.ReadValue<float>();
     }
-    public void ResetAfterDeathInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-
-        }
-    }
-    public void ResetInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-
-        }
-    }
     public void LeaveToMenuInput(InputAction.CallbackContext context)
     {
         if (context.performed)
