@@ -7,10 +7,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public static event Action OnPlayerDeath;
-    [SerializeField] public static event Action OnWin;
     [SerializeField] UnityEvent OnPlayerWin;
-    [SerializeField] UnityEvent OnPlayerDeathUnityEvent;
+    [SerializeField] UnityEvent OnPlayerDeath;
 
     [SerializeField] LayerMask groundLayerMask;
     enum STATES { IDLE, RUN, JUMP, FALL, DEAD }
@@ -92,15 +90,13 @@ public class Player : MonoBehaviour
         jumpSpeed = gravity * timeToJumpPeak;
         maxHorizontalSpeed = jumpDistance / (2 * timeToJumpPeak);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Death")
         {
             rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
             rb2D.velocity = Vector2.zero;
-            OnPlayerDeath?.Invoke();
-            OnPlayerDeathUnityEvent.Invoke();
+            OnPlayerDeath.Invoke();
             currentState = STATES.DEAD;
         }
         if (collision.gameObject.tag == "Win")
@@ -108,7 +104,6 @@ public class Player : MonoBehaviour
             rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
             rb2D.velocity = Vector2.zero;
             OnPlayerWin.Invoke();
-            OnWin?.Invoke();
             currentState = STATES.DEAD;
         }
     }
@@ -143,7 +138,7 @@ public class Player : MonoBehaviour
         {
             if (currentState == STATES.IDLE || currentState == STATES.RUN)
             {
-                OnPlayerNormalJump?.Invoke();
+                OnPlayerNormalJump.Invoke();
                 Jump(1f);
             }
         }
@@ -213,6 +208,14 @@ public class Player : MonoBehaviour
     public void JumpOnBouncePad(float bigJump, float smallJump)
     {
         OnPlayerBouncePadJump?.Invoke();
+        //if (jumpBufferTimer > 0)
+        //{
+        //    Jump(bigJump);
+        //}
+        //else  
+        //{
+        //    Jump(smallJump);
+        //}
         if (jumpPressed)
         {
             Jump(bigJump);

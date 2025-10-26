@@ -179,6 +179,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90dc798a3a1794c3c84839fd466a52be, type: 3}
+--- !u!114 &54899667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 57540402751846039, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+  m_PrefabInstance: {fileID: 2046419708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a7ff4e969d9ff41b16d5bd58f76c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &181814694
 GameObject:
   m_ObjectHideFlags: 0
@@ -50849,6 +50860,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 850.6
       objectReference: {fileID: 0}
+    - target: {fileID: 5412976616780759888, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5519208153782290846, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
       value: 869
@@ -50903,7 +50918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5854962135891571233, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.4
+      value: 18.40858
       objectReference: {fileID: 0}
     - target: {fileID: 5854962136250643010, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_Color.b
@@ -50960,6 +50975,130 @@ PrefabInstance:
     - target: {fileID: 5854962136751877583, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 38fdbe5a-b62d-4c57-8bbc-9b7f0a4b294b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: fffd54ee-c847-4cba-ba7c-b98f56873bdc
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 0542922f-f7fb-4ae8-af25-26b011c3273f
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 40d4c85f-fe7f-4148-85d0-1d3dc5643fff
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 7e304573-3465-4184-a2f8-643be0e8ade4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 4d647641-7fd8-438f-9f93-5a5fb63d6c80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 4d695aa3-dd31-4c1b-9350-b506df274f41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 489b1777-cc18-460c-ad5a-7981aca24976
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: 5cdc2f3e-6d50-43d7-b646-cbf515e1b231
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Player/MouseAim[/Mouse/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Player/Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Player/Jump[/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/leftTrigger,/Keyboard/space,/Keyboard/w,/Keyboard/upArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Player/ResetAfterDeath[/Keyboard/anyKey,/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID/rightTrigger,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/leftTrigger,/DualSenseGamepadHID/buttonSouth,/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID/buttonWest,/DualSenseGamepadHID/buttonNorth,/DualSenseGamepadHID/rightStickPress,/DualSenseGamepadHID/leftStickPress]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: Player/New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Quit[/DualSenseGamepadHID/start,/DualSenseGamepadHID/select,/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Player/AlternateShoot[/DualSenseGamepadHID/rightShoulder,/Mouse/rightButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: Player/ControllerRightStickAIm[/DualSenseGamepadHID/rightStick]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: Player/ControllerLeftStickAIm[/DualSenseGamepadHID/leftStick]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 54899667}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MouseAim
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShootInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JumpEnter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetAfterDeathInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LeaveToMenuInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Gun, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8008201593443687837, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8667138613211155501, guid: 2cf93577af31e48b89e4c7548643b8ef, type: 3}
       propertyPath: m_LocalPosition.x
