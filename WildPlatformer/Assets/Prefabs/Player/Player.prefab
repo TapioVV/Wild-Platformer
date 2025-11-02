@@ -1006,84 +1006,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerDeathUnityEvent:
+  OnPlayerDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3304347579890495547}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1047462827180334703}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3304347580209893236}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9204714463108858290}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DeathWall, Assembly-CSharp
-        m_MethodName: MoveWallToMiddleOfScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3304347580209893238}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  groundLayerMask:
+      m_Calls: []
+  GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  CurrentState: {fileID: 0}
+  idleState: {fileID: 0}
+  runState: {fileID: 0}
+  jumpState: {fileID: 0}
+  fallState: {fileID: 0}
+  deadState: {fileID: 0}
   horizontalAcceleration: 350
   horizontalDeacceleration: 400
   jumpControlAcceleration: 1.5
@@ -1093,9 +1027,12 @@ MonoBehaviour:
   jumpDistance: 25
   smallJump: 0.5
   maxVerticalSpeed: 80
+  maxHorizontalSpeed: 0
   velocity: {x: 0, y: 0}
+  inputAxis: 0
   jumpInputBuffer: 0.1
-  grounded: 0
+  rb2D: {fileID: 0}
+  animator: {fileID: 0}
   particleSystem: {fileID: 9204714463108858290}
   move: {fileID: 4451190145840997014, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}
   jump: {fileID: 6993509728658724309, guid: bb8b2dbf9f15d8144b545c74b6a6a946, type: 3}

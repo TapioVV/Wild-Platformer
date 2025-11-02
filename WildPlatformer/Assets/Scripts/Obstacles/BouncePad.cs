@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BouncePad : MonoBehaviour
 {
-    
     [SerializeField] float jumpMultiplierBigJump;
     [SerializeField] float jumpMultiplierSmallJump;
     [SerializeField] float activationDelay;

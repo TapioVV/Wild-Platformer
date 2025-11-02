@@ -10,10 +10,18 @@ public class Player : MonoBehaviour
     [SerializeField] UnityEvent OnPlayerWin;
     [SerializeField] UnityEvent OnPlayerDeath;
 
-    [SerializeField] LayerMask groundLayerMask;
-    enum STATES { IDLE, RUN, JUMP, FALL, DEAD }
-    STATES currentState;
+    public LayerMask GroundLayerMask;
+    
+    public State CurrentState;
 
+    [HideInInspector] public IdleState idleState;
+    [HideInInspector] public RunState runState;
+    [HideInInspector] public JumpState jumpState;
+    [HideInInspector] public FallState fallState;
+    [HideInInspector] public DeadState deadState;
+
+    
+    
     [SerializeField] float horizontalAcceleration;
     [SerializeField] float horizontalDeacceleration;
     [SerializeField] float jumpControlAcceleration;
@@ -23,25 +31,24 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpDistance;
 
-    [SerializeField] float smallJump;
+    public float smallJump;
     [SerializeField] float maxVerticalSpeed;
     bool jumpPressed = false;
 
-    float maxHorizontalSpeed;
+    [HideInInspector] public float maxHorizontalSpeed;
     float gravity;
     float jumpSpeed;
 
     public Vector2 velocity;
 
-    int inputAxis;
+    public int inputAxis;
 
     float jumpBufferTimer = 0;
     [SerializeField] float jumpInputBuffer;
-    public bool grounded;
 
-    Rigidbody2D rb2D;
+    [HideInInspector] public Rigidbody2D rb2D;
     BoxCollider2D boxCollider;
-    Animator animator;
+    [HideInInspector] public Animator animator;
     SpriteRenderer spriteRenderer;
     [SerializeField] ParticleSystem particleSystem;
 
@@ -50,172 +57,121 @@ public class Player : MonoBehaviour
     [SerializeField] InputActionReference jump;
 
     [Header("SoundEvents")]
-    [SerializeField] UnityEvent OnPlayerNormalJump;
+    public UnityEvent OnPlayerNormalJump;
     [SerializeField] UnityEvent OnPlayerBouncePadJump;
 
-    #region Inputs
-    public void MoveInput(InputAction.CallbackContext context)
+    private void Awake()
     {
-        inputAxis = (int)context.ReadValue<float>();
-    }
+        idleState = gameObject.AddComponent<IdleState>();
+        runState = gameObject.AddComponent<RunState>();
+        fallState = gameObject.AddComponent<FallState>();
+        deadState = gameObject.AddComponent<DeadState>();
+        jumpState = gameObject.AddComponent<JumpState>();
 
-    private void OnEnable()
-    {
-        move.action.performed += MoveInput;
-        jump.action.started += PressJump;
-        LaserBullet.OnLaserJump += Jump;
-
-        jump.action.canceled += ReleaseJump;
-    }
-    private void OnDisable()
-    {
-        move.action.performed -= MoveInput;
-        jump.action.started -= PressJump;
-
-        jump.action.canceled -= ReleaseJump;
-    }
-
-    #endregion
-    void Start()
-    {
         rb2D = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         particleSystem = GetComponent<ParticleSystem>();
 
-        currentState = STATES.IDLE;
-
         gravity = (2 * jumpHeight) / Mathf.Pow(timeToJumpPeak, 2);
         jumpSpeed = gravity * timeToJumpPeak;
         maxHorizontalSpeed = jumpDistance / (2 * timeToJumpPeak);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Death")
+
+        State[] states = { idleState, runState, jumpState, fallState, deadState };
+        for (int i = 0; i < states.Length; i++) 
         {
-            rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
-            rb2D.velocity = Vector2.zero;
-            OnPlayerDeath.Invoke();
-            currentState = STATES.DEAD;
-        }
-        if (collision.gameObject.tag == "Win")
-        {
-            rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
-            rb2D.velocity = Vector2.zero;
-            OnPlayerWin.Invoke();
-            currentState = STATES.DEAD;
-        }
-    }
-    private void Update()
-    {
-        jumpBufferTimer = Mathf.MoveTowards(jumpBufferTimer, -1, Time.deltaTime);
+            states[i].horizontalAcceleration = horizontalAcceleration;
+            states[i].horizontalDeacceleration = horizontalDeacceleration;
+            states[i].jumpControlAcceleration = jumpControlAcceleration;
+            states[i].jumpControlDeacceleration = jumpControlDeacceleration;
+            states[i].maxHorizontalSpeed = maxHorizontalSpeed;
+            states[i].boxCollider = boxCollider;
+            states[i].gravity = gravity;
 
-        switch (currentState)
-        {
-            case STATES.IDLE:
-                Idle();
-                break;
-
-            case STATES.RUN:
-                Running();
-                break;
-
-            case STATES.JUMP:
-                Jumping();
-                break;
-
-            case STATES.FALL:
-                Falling();
-                break;
-            case STATES.DEAD:
-                rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
-                rb2D.velocity = Vector2.zero;
-
-                break;
-        }
-        if (jumpBufferTimer > 0 && jumpPressed == true)
-        {
-            if (currentState == STATES.IDLE || currentState == STATES.RUN)
-            {
-                OnPlayerNormalJump.Invoke();
-                Jump(1f);
-            }
-        }
-
-        velocity.y = Mathf.Clamp(velocity.y, -maxVerticalSpeed, 10000000);
-    }
-
-    void Idle()
-    {
-        animator.CrossFade("character_idle_animation", 0, 0);
-        velocity.y = -2;
-        if (inputAxis != 0)
-        {
-            currentState = STATES.RUN;
-        }
-        if (!IsGrounded())
-        {
-            currentState = STATES.FALL;
+            states[i].player = this;
+            states[i].spriteRenderer = spriteRenderer;
+            states[i].animator = animator;
         }
     }
-    void Running()
+    public void MoveInput(InputAction.CallbackContext context)
     {
-        animator.CrossFade("character_run_animation", 0, 0);
-        velocity.y = -2;
+        inputAxis = (int)context.ReadValue<float>();
+    }
+    public void StoppedMoveInput(InputAction.CallbackContext context)
+    {
+        inputAxis = 0;
+    }
 
-        if (inputAxis == 0)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, horizontalDeacceleration * Time.deltaTime);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * maxHorizontalSpeed, horizontalAcceleration * Time.deltaTime);
-        }
 
-        if (inputAxis == 1)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (inputAxis == -1)
-        {
-            spriteRenderer.flipX = true;
-        }
+    private void OnEnable()
+    {
+        move.action.canceled += StoppedMoveInput;
+        move.action.performed += MoveInput;
+        jump.action.started += PressJump;
+        LaserBullet.OnLaserJump += Jump;
 
-        if (velocity.x >= -0.1f && velocity.x <= 0.1f)
-        {
-            velocity.x = 0;
-            currentState = STATES.IDLE;
-        }
-        if (!IsGrounded())
-        {
-            currentState = STATES.FALL;
-        }
+        jump.action.canceled += jumpState.ReleaseJump; 
+    }
+    private void OnDisable()
+    {
+        move.action.canceled -= StoppedMoveInput;
+        move.action.performed -= MoveInput;
+        jump.action.started -= PressJump;
+
+        jump.action.canceled -= jumpState.ReleaseJump;
+
     }
     public void PressJump(InputAction.CallbackContext context)
     {
         jumpPressed = true;
         jumpBufferTimer = jumpInputBuffer;
     }
-    public void ReleaseJump(InputAction.CallbackContext context)
+    public void Jump(float multiplier)
     {
-        jumpPressed = false;
-        if (currentState == STATES.JUMP)
+        velocity.y = jumpSpeed * multiplier;
+    }
+    public void JumpBuffer()
+    {
+        jumpBufferTimer = Mathf.MoveTowards(jumpBufferTimer, -1, Time.deltaTime);
+        if (jumpBufferTimer > 0 && jumpPressed == true)
         {
-            velocity.y = velocity.y * smallJump;
+            CurrentState.JumpInput();
         }
+    }
+    void Start()
+    {
+        CurrentState = idleState;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Death")
+        {
+            CurrentState = deadState;
+            OnPlayerDeath.Invoke();
+        }
+        if (collision.gameObject.tag == "Win")
+        {
+            CurrentState = deadState;
+            OnPlayerWin.Invoke();
+        }
+    }
+    private void Update()
+    {
+        CurrentState.StateUpdate();
+
+        JumpBuffer();
+        velocity.y = Mathf.Clamp(velocity.y, -maxVerticalSpeed, 10000000);
+    }
+
+    public void ChangeState(State newState)
+    {
+        CurrentState = newState;
     }
     public void JumpOnBouncePad(float bigJump, float smallJump)
     {
         OnPlayerBouncePadJump?.Invoke();
-        //if (jumpBufferTimer > 0)
-        //{
-        //    Jump(bigJump);
-        //}
-        //else  
-        //{
-        //    Jump(smallJump);
-        //}
+
         if (jumpPressed)
         {
             Jump(bigJump);
@@ -225,76 +181,15 @@ public class Player : MonoBehaviour
             Jump(smallJump);
         }
     }
-    public void Jump(float multiplier)
-    {
-        velocity.y = jumpSpeed * multiplier;
-        currentState = STATES.JUMP;
-    }
 
-    void Jumping()
-    {
-        animator.CrossFade("character_jump_animation", 0, 0);
-        if (inputAxis == 0)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, horizontalDeacceleration / jumpControlDeacceleration * Time.deltaTime);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * maxHorizontalSpeed, horizontalAcceleration / jumpControlAcceleration * Time.deltaTime);
-        }
-
-        if (IsTouchingCeiling())
-        {
-            velocity.y = 0;
-        }
-
-        if (velocity.y <= 0)
-        {
-            currentState = STATES.FALL;
-        }
-
-        velocity.y -= gravity * Time.deltaTime;
-    }
-    void Falling()
-    {
-        animator.CrossFade("character_jump_animation", 0, 0);
-        if (inputAxis == 0)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, horizontalDeacceleration / jumpControlDeacceleration * Time.deltaTime);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * maxHorizontalSpeed, horizontalAcceleration / jumpControlAcceleration * Time.deltaTime);
-        }
-
-        if (IsGrounded())
-        {
-            if (velocity.x >= -0.1f && velocity.x <= 0.1f)
-            {
-                velocity.x = 0;
-                currentState = STATES.IDLE;
-            }
-            else
-            {
-                currentState = STATES.RUN;
-            }
-        }
-        velocity.y -= gravity * Time.deltaTime;
-    }
 
     void FixedUpdate()
     {
         rb2D.velocity = velocity;
     }
-
-    bool IsGrounded()
+    public bool IsGrounded()
     {
-        RaycastHit2D ray = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayerMask);
-        return ray.collider != null;
-    }
-    bool IsTouchingCeiling()
-    {
-        RaycastHit2D ray = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.up, 0.1f, groundLayerMask);
+        RaycastHit2D ray = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, GroundLayerMask);
         return ray.collider != null;
     }
 }
